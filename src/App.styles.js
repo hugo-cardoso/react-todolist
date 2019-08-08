@@ -38,12 +38,23 @@ export const Wrapper = styled.div`
   border: 1px solid #B0BEC5;
   display: flex;
   flex-direction: column;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  @media screen and (min-width: 768px) {
+    max-height: 700px;
+  }
 `;
 
 export const Header = styled.div`
   padding: 15px 30px;
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid #CFD8DC;
 `;
 
 export const Title = styled.h1`
@@ -68,6 +79,12 @@ export const Input = styled.input`
   color: #616161;
   font-size: 13px;
   font-weight: 500;
+  appearance: none;
+
+  @media screen and (max-width: 768px) {
+    height: 40px;
+    font-size: 16px;
+  }
 `;
 
 export const TodoList = styled.div`
@@ -76,17 +93,25 @@ export const TodoList = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    flex: 1 1 auto;
+  }
 `;
 
 export const TodoListItem = styled.div`
   display: flex;
   height: 50px;
-  border-top: 1px solid #CFD8DC;
+  min-height: 50px;
+  border-top: 1px solid #EEEEEE;
+  background-color: #FFF;
   ${ ({checked}) => checked && `
       > * {
         opacity: .5;
       }
-  ` }
+  ` };
+
+  :first-child {border-top: 0;}
 `;
 
 export const TodoListItemCheckboxWrapper = styled.div`
