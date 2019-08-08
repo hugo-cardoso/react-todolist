@@ -34,7 +34,6 @@ export const GlobalStyles = createGlobalStyle`
 
 export const Wrapper = styled.div`
   width: 300px;
-  height: 300px;
   border-radius: 4px;
   border: 1px solid #B0BEC5;
   display: flex;
@@ -69,4 +68,39 @@ export const Input = styled.input`
   color: #616161;
   font-size: 13px;
   font-weight: 500;
+`;
+
+export const TodoList = styled.div`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+`;
+
+export const TodoListItem = styled.div`
+  display: flex;
+  height: 50px;
+  border-top: 1px solid #CFD8DC;
+  ${ ({checked}) => checked && `
+      > * {
+        opacity: .5;
+      }
+  ` }
+`;
+
+export const TodoListItemCheckboxWrapper = styled.div`
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+export const TodoListItemContent = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
 `;
