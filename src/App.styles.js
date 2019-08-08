@@ -103,7 +103,7 @@ export const TodoListItem = styled.div`
   display: flex;
   height: 50px;
   min-height: 50px;
-  border-top: 1px solid #EEEEEE;
+  border-bottom: 1px solid #EEEEEE;
   background-color: #FFF;
   ${ ({checked}) => checked && `
       > * {
@@ -114,7 +114,7 @@ export const TodoListItem = styled.div`
   :first-child {border-top: 0;}
 `;
 
-export const TodoListItemCheckboxWrapper = styled.div`
+export const TodoListItemActionWrapper = styled.div`
   width: 50px;
   height: 100%;
   display: flex;
@@ -128,4 +128,13 @@ export const TodoListItemContent = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+`;
+
+export const TodoListPlaceholder = styled.div`
+  width: 100%;
+  min-height: 150px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
