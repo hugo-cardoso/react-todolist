@@ -21,6 +21,7 @@ const App = () => {
 
   useEffect(() => {
     inputRef.current.focus();
+    getLocalStorageTodos();
   }, []);
 
   const addTodo = text => {
@@ -30,6 +31,7 @@ const App = () => {
       checked: false
     });
     setTodoItems(newTodoItems);
+    updateLocalStorageTodos(newTodoItems);
   }
 
   const handleInputChange = event => setInputText(event.target.value);
@@ -44,7 +46,15 @@ const App = () => {
     const newTodoItems = [...todoItems];
     newTodoItems[index].checked = !todoItems[index].checked;
     setTodoItems(newTodoItems);
+    updateLocalStorageTodos(newTodoItems);
   }
+
+  const getLocalStorageTodos = () => {
+    const storagedTodos = window.localStorage.getItem('react-todolist');
+    if( storagedTodos ) setTodoItems(JSON.parse(storagedTodos));
+  }
+
+  const updateLocalStorageTodos = todos => window.localStorage.setItem('react-todolist', JSON.stringify(todos));
 
   return (
     <>
