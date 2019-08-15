@@ -16,5 +16,6 @@ Obs: Certifique-se de ter o [nodejs](https://nodejs.org/en/) e o [npm](https://w
 ### Tecnologias utilizadas
 
 - React
+- Redux
 - Babel
 - Webpack
