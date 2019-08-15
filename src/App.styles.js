@@ -63,7 +63,10 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #CFD8DC;
-  flex: 0 0;
+  
+  @media screen and (min-width: 768px) {
+    flex: 0 0;
+  }
 `;
 
 export const Title = styled.h1`
