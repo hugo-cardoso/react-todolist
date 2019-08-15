@@ -76,6 +76,7 @@ const App = () => {
               value={inputText}
               onChange={handleInputChange}
               placeholder="add a new todo..."
+              required
             />
           </Form>
         </Header>
@@ -95,12 +96,12 @@ const App = () => {
                       <TodoListItemContent>{ text }</TodoListItemContent>
                       <TodoListItemActionWrapper onClick={() => removeTodo(index)}>
                         <Icon path={mdiClose}
-                          size={1}
+                          size={.7}
                           color="#ACACAC" 
                         />
                       </TodoListItemActionWrapper>
                     </TodoListItem>
-                  ))
+                  )).reverse()
                 }
               </TodoList>
             ) : (

@@ -10,14 +10,19 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html,body, #app {
+  html, body, #app {
     height: 100%;
+  }
+
+  body {
+    overflow: hidden;
   }
 
   body * {
     font: 14px 'Roboto', sans-serif;
     color: #455A64;
     -webkit-font-smoothing: antialiased !important;
+    overflow: hidden;
   }
 
   ul, ol {
@@ -25,6 +30,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #app {
+    max-height: 100vh;
+    overflow-y: hidden;
     display: flex;
     background-color: #ECEFF1;
     justify-content: center;
@@ -42,6 +49,7 @@ export const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
     height: 100%;
+    justify-content: flex-start;
     border: 0;
   }
 
@@ -55,6 +63,7 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #CFD8DC;
+  flex: 0 0;
 `;
 
 export const Title = styled.h1`
@@ -93,10 +102,7 @@ export const TodoList = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
-  @media screen and (max-width: 768px) {
-    flex: 1 1 auto;
-  }
+  background-color: #EEEEEE;
 `;
 
 export const TodoListItem = styled.div`
