@@ -1,9 +1,12 @@
 {
   "name": "react-todolist",
   "version": "1.0.0",
+  "homepage": "https://hugo-cardoso.github.io/react-todolist",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --color --open --config ./config/webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config ./config/webpack.prod.js"
+    "build": "NODE_ENV=production webpack --config ./config/webpack.prod.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Hugo Cardoso <hugorafaelmc@gmail.com>",
   "license": "MIT",
@@ -34,7 +37,8 @@
     "@mdi/react": "^1.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "styled-components": "^5.0.0-beta.8"
+    "styled-components": "^5.0.0-beta.8",
+    "gh-pages": "^2.0.1"
   },
   "browserslist": [
     "last 2 version",
