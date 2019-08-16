@@ -5,21 +5,30 @@ import {
   clearInputText
 } from './actions';
 import { addTodo } from '@components/TodoList/actions';
+import { logout } from '@pages/Login/actions';
+
+import Icon from '@mdi/react';
+import { mdiLogout } from '@mdi/js';
 
 import {
   Wrapper,
   Title,
   Form,
-  Input
+  Input,
+  Row,
+  ButtonLogout
 } from './style';
 
-const Header = ({title}) => {
+const Header = () => {
   const dispatch = useDispatch();
+  const user = useSelector(({loginPage}) => loginPage.user);
   const inputText = useSelector(({ header }) => header.inputText);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    setTimeout(() => {
+      inputRef.current.focus();
+    }, 1000);
   },[])
 
   const addTodoItem = text => dispatch(addTodo(text));
@@ -34,13 +43,21 @@ const Header = ({title}) => {
 
   return (
     <Wrapper>
-      <Title>{ title }</Title>
+      <Row>
+        <Title>//TODO <small>List</small></Title>
+        <ButtonLogout onClick={() => dispatch(logout())}>
+          <Icon path={mdiLogout}
+            size={1}
+            color="#FFF" 
+          />
+        </ButtonLogout>
+      </Row>
       <Form onSubmit={handleFormSubmit}>
         <Input
           ref={inputRef}
           value={inputText}
           onChange={handleInputChange}
-          placeholder="add a new todo..."
+          placeholder={ `add a new todo ${ user.displayName.split(" ")[0] }...` }
           required
         />
       </Form>

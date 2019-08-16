@@ -9,7 +9,8 @@ import {
 import {
   Wrapper,
   ActionWrapper,
-  Content
+  Content,
+  Text
 } from './style';
 
 const TodoItem = ({
@@ -23,14 +24,16 @@ const TodoItem = ({
       <ActionWrapper onClick={() => dispatch(toggleCheckTodo(id))}>
         <Icon path={isChecked ? mdiCheckboxMarked : mdiCheckboxBlankOutline}
           size={1}
-          color="#ACACAC" 
+          color="#FFF" 
         />
       </ActionWrapper>
-      <Content>{ text }</Content>
+      <Content>
+        <Text>{ text }</Text>
+      </Content>
       <ActionWrapper onClick={() => dispatch(removeTodo(id))}>
         <Icon path={mdiClose}
-          size={.7}
-          color="#ACACAC" 
+          size={1}
+          color="#F0002F" 
         />
       </ActionWrapper>
     </Wrapper>

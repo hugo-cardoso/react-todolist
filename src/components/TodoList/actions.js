@@ -1,37 +1,63 @@
 import store from '@/store';
+import firebase from 'firebase';
+import database from '@/utils/database';
 
 export const setTodos = todos => ({
   type: 'SET_TODOS',
   todos
 });
 
-const setLocalStorageTodos = todos => window.localStorage.setItem('react-todolist', JSON.stringify(todos));
+export const getTodos = () => async dispatch => {
+  const { email } = store.getState().loginPage.user;
+  const ref = database.collection('users').doc(email).collection('todos');
+  ref.orderBy('createdAt').onSnapshot(snapshot => {
+		const todos = [];
+    snapshot.forEach((doc) => {
+      const { id } = doc;
+      const { text, checked } = doc.data();
+      todos.push({id, text, checked});
+    });
+    dispatch(setTodos(todos));
+	});
+};
 
-export const addTodo = text => dispatch => {
-  const todos = [...store.getState().todoList.todos];
-  todos.push({
+export const addTodo = text => async dispatch => {
+  const { email } = store.getState().loginPage.user;
+  const ref = database.collection('users').doc(email).collection('todos');
+  const createdAt = firebase.firestore.FieldValue.serverTimestamp();
+  await ref.add({
     text,
+    createdAt,
     checked: false
   });
-  setLocalStorageTodos(todos);
-  dispatch(setTodos(todos));
+  dispatch(updateTodos());
 };
 
-export const removeTodo = index => dispatch => {
-  const todos = [...store.getState().todoList.todos];
-  todos.splice(index, 1);
-  setLocalStorageTodos(todos);
-  dispatch(setTodos(todos));
+export const removeTodo = id => async dispatch => {
+  const { email } = store.getState().loginPage.user;
+  const ref = database.collection('users').doc(email).collection('todos').doc(id);
+  await ref.delete();
+  dispatch(updateTodos());
 };
 
-export const toggleCheckTodo = index => dispatch => {
-  const todos = [...store.getState().todoList.todos];
-  todos[index].checked = !todos[index].checked;
-  setLocalStorageTodos(todos);
-  dispatch(setTodos(todos));
+export const toggleCheckTodo = id => async dispatch => {
+  const { email } = store.getState().loginPage.user;
+  const ref = database.collection('users').doc(email).collection('todos').doc(id);
+  const todo = await ref.get();
+  const { checked } = todo.data();
+  ref.update({ checked: !checked });
+  dispatch(updateTodos());
 };
 
-export const getLocalStorageTodos = () => async dispatch => {
-  const storagedTodos = await window.localStorage.getItem('react-todolist');
-  if( storagedTodos ) dispatch(setTodos(JSON.parse(storagedTodos)));
+export const updateTodos = () => async dispatch => {
+  const { email } = store.getState().loginPage.user;
+  const ref = database.collection('users').doc(email).collection('todos');
+  const snapshot = await ref.orderBy('createdAt').get();
+  const todos = [];
+  snapshot.forEach((doc) => {
+    const { id } = doc;
+    const { text, checked } = doc.data();
+    todos.push({id, text, checked});
+  });
+  dispatch(setTodos(todos));
 };

@@ -5,6 +5,7 @@
     "baseUrl": "./node_modules",
     "paths": {
       "@components/*": ["../src/components/*"],
+      "@pages/*": ["../src/pages/*"],
       "@images/*": ["../src/assets/images/*"],
       "@scss/*": ["../src/assets/scss/*"],
       "@/*": ["../src/*"]

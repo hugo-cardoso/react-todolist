@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getLocalStorageTodos } from './actions';
+import { getTodos } from './actions';
 
 import Icon from '@mdi/react';
 import { mdiFormatListBulletedSquare } from '@mdi/js';
@@ -13,7 +13,7 @@ const TodoList = () => {
   const todoItems = useSelector(({todoList}) => todoList.todos);
 
   useEffect(() => {
-    dispatch(getLocalStorageTodos());
+    dispatch(getTodos());
   }, []);
 
   return (
@@ -21,19 +21,19 @@ const TodoList = () => {
       {
         todoItems.length ?
         (
-          todoItems.map(({checked, text}, index) => (
+          todoItems.map(({checked, text, id}, index) => (
             <TodoItem 
               text={text}
               isChecked={checked}
-              key={index}
-              id={index}
+              key={id}
+              id={id}
             />
           )).reverse()
         ) : (
           <Placeholder>
             <Icon path={mdiFormatListBulletedSquare}
               size={1}
-              color="#ACACAC" 
+              color="#FFF" 
             />
           </Placeholder>
         )

@@ -6,7 +6,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  background-color: #EEEEEE;
+  background-color: #000;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Placeholder = styled.div`
