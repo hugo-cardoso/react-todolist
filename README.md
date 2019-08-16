@@ -17,5 +17,7 @@ Obs: Certifique-se de ter o [nodejs](https://nodejs.org/en/) e o [npm](https://w
 
 - React
 - Redux
+- Firebase
+- Styled Components
 - Babel
 - Webpack
