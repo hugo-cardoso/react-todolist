@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  padding: 15px;
+  padding: 15px 15px 0 15px;
   display: flex;
   flex-direction: column;
   background-color: #F0002F;
@@ -62,4 +62,36 @@ export const Input = styled.input`
     height: 50px;
     font-size: 16px;
   }
+`;
+
+export const Tabs = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  ::before {
+    content: '';
+    width: calc(100% / ${ ({tabsCount}) => tabsCount });
+    height: 2px;
+    background-color: #FFF;
+    bottom: 0;
+    left: calc(calc(100% / ${ ({tabsCount}) => tabsCount }) * ${({tabActive}) => tabActive});
+    position: absolute;
+    transition: left .3s ease;
+  }
+`;
+
+export const Tab = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 16px;
+  font-weight: ${ ({isActive}) => isActive ? 700 : 400 };
+  padding: 0 15px;
+  position: relative;
 `;

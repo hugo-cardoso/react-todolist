@@ -7,6 +7,21 @@ export const setTodos = todos => ({
   todos
 });
 
+export const setFilteredTodos = todos => ({
+  type: 'SET_FILTERED_TODOS',
+  todos
+});
+
+export const setFilterIsActive = status => ({
+  type: 'SET_FILTER_IS_ACTIVE',
+  status
+});
+
+export const setSelectedFilter = filter => ({
+  type: 'SET_SELECTED_FILTER',
+  filter
+});
+
 export const getTodos = () => async dispatch => {
   const { email } = store.getState().loginPage.user;
   const ref = database.collection('users').doc(email).collection('todos');
@@ -28,7 +43,7 @@ export const addTodo = text => async dispatch => {
   await ref.add({
     text,
     createdAt,
-    checked: false
+    checked: false,
   });
   dispatch(updateTodos());
 };
@@ -51,6 +66,7 @@ export const toggleCheckTodo = id => async dispatch => {
 
 export const updateTodos = () => async dispatch => {
   const { email } = store.getState().loginPage.user;
+  const { selectedFilter } = store.getState().todoList;
   const ref = database.collection('users').doc(email).collection('todos');
   const snapshot = await ref.orderBy('createdAt').get();
   const todos = [];
@@ -60,4 +76,16 @@ export const updateTodos = () => async dispatch => {
     todos.push({id, text, checked});
   });
   dispatch(setTodos(todos));
+  dispatch(filterByStatus(selectedFilter));
+};
+
+export const filterByStatus = status => async dispatch => {
+  const { todos } = store.getState().todoList;
+  if( status == 'ALL' ) {
+    dispatch(setFilterIsActive(false));
+    return;
+  }
+  const filteredTodos = todos.filter(todo => todo.checked == (status == 'DONES'));
+  dispatch(setFilterIsActive(true));
+  dispatch(setFilteredTodos(filteredTodos));
 };

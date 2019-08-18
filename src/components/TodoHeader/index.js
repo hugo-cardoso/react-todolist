@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   updateInputText,
   clearInputText
 } from './actions';
-import { addTodo } from '@components/TodoList/actions';
+import { addTodo, filterByStatus, setSelectedFilter } from '@components/TodoList/actions';
 import { logout } from '@pages/Login/actions';
 
 import Icon from '@mdi/react';
@@ -16,14 +16,19 @@ import {
   Form,
   Input,
   Row,
-  ButtonLogout
+  ButtonLogout,
+  Tabs,
+  Tab
 } from './style';
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector(({loginPage}) => loginPage.user);
   const inputText = useSelector(({ header }) => header.inputText);
+  const { todos } = useSelector(({ todoList }) => todoList);
   const inputRef = useRef(null);
+  const [tabActive, setTabActive] = useState(0);
+  const TABS = ['ALL', 'PENDING', 'DONE'];
 
   useEffect(() => {
     setTimeout(() => {
@@ -40,6 +45,13 @@ const Header = () => {
     addTodoItem(inputText);
     dispatch(clearInputText());
   }
+
+  const handleTabClick = index => {
+    const tab = TABS[index];
+    setTabActive(index);
+    dispatch(setSelectedFilter(tab));
+    dispatch(filterByStatus(tab));
+  };
 
   return (
     <Wrapper>
@@ -61,6 +73,13 @@ const Header = () => {
           required
         />
       </Form>
+      <Tabs tabsCount={TABS.length} tabActive={tabActive}>
+        {
+          TABS.map((tab, index) => (
+            <Tab key={tab} onClick={() => handleTabClick(index)}>{ tab }{ tab == 'ALL' && `(${ todos.length })` }</Tab>
+          ))
+        }
+      </Tabs>
     </Wrapper>
   )
 };

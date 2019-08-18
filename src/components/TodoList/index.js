@@ -10,7 +10,7 @@ import { Wrapper, Placeholder } from './style';
 
 const TodoList = () => {
   const dispatch = useDispatch();
-  const todoItems = useSelector(({todoList}) => todoList.todos);
+  const { todos, filteredTodos, filterIsActive, selectedFilter } = useSelector(({todoList}) => todoList);
 
   useEffect(() => {
     dispatch(getTodos());
@@ -18,10 +18,9 @@ const TodoList = () => {
 
   return (
     <Wrapper>
-      {
-        todoItems.length ?
-        (
-          todoItems.map(({checked, text, id}, index) => (
+      { 
+        (filteredTodos.length && filterIsActive) ? (
+          filteredTodos.map(({checked, text, id}, index) => (
             <TodoItem 
               text={text}
               isChecked={checked}
@@ -29,7 +28,24 @@ const TodoList = () => {
               id={id}
             />
           )).reverse()
-        ) : (
+        ) : null
+      }
+
+      { 
+        (todos.length && !filterIsActive) ? (
+          todos.map(({checked, text, id}, index) => (
+            <TodoItem 
+              text={text}
+              isChecked={checked}
+              key={id}
+              id={id}
+            />
+          )).reverse()
+        ) : null
+      } 
+
+      {
+        ((!todos.length) || (filterIsActive && !filteredTodos.length)) && (
           <Placeholder>
             <Icon path={mdiFormatListBulletedSquare}
               size={1}
