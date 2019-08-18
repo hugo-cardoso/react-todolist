@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
 export const Row = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 15px;
 `;
 
 export const Title = styled.h1`
@@ -22,7 +23,6 @@ export const Title = styled.h1`
   font-size: 20px;
   text-align: left;
   font-weight: 700;
-  margin-bottom: 15px;
 
   & > small {
     font-weight: 400;
@@ -34,7 +34,7 @@ export const Title = styled.h1`
 export const ButtonLogout = styled.button`
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background-color: transparent;
   border: 0;
   appearance: none;
