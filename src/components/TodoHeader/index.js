@@ -8,7 +8,7 @@ import { addTodo, filterByStatus, setSelectedFilter } from '@components/TodoList
 import { logout } from '@pages/Login/actions';
 
 import Icon from '@mdi/react';
-import { mdiLogout } from '@mdi/js';
+import { mdiLogout, mdiLoading } from '@mdi/js';
 
 import {
   Wrapper,
@@ -18,13 +18,14 @@ import {
   Row,
   ButtonLogout,
   Tabs,
-  Tab
+  Tab,
+  LoadingIcon
 } from './style';
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector(({loginPage}) => loginPage.user);
-  const inputText = useSelector(({ header }) => header.inputText);
+  const { inputText, isLoading } = useSelector(({ header }) => header);
   const { todos } = useSelector(({ todoList }) => todoList);
   const inputRef = useRef(null);
   const [tabActive, setTabActive] = useState(0);
@@ -57,6 +58,17 @@ const Header = () => {
     <Wrapper>
       <Row>
         <Title>//TODO <small>List</small></Title>
+        {
+          isLoading && (
+            <LoadingIcon>
+              <Icon path={mdiLoading}
+                size={1}
+                color="#FFF"
+                spin={.7}
+              />
+            </LoadingIcon>
+          )
+        }
         <ButtonLogout onClick={() => dispatch(logout())}>
           <Icon path={mdiLogout}
             size={1}

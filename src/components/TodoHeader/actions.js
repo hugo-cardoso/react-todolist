@@ -3,4 +3,9 @@ export const updateInputText = inputText => ({
   inputText
 });
 
+export const setLoadingStatus = status => ({
+  type: 'SET_LOADING_STATUS',
+  status
+});
+
 export const clearInputText = () => dispatch => dispatch(updateInputText(""));

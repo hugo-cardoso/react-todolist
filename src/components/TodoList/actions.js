@@ -1,4 +1,5 @@
 import store from '@/store';
+import { setLoadingStatus } from '@components/TodoHeader/actions';
 import firebase from 'firebase';
 import database from '@/utils/database';
 
@@ -23,6 +24,7 @@ export const setSelectedFilter = filter => ({
 });
 
 export const getTodos = () => async dispatch => {
+  dispatch(setLoadingStatus(true));
   const { email } = store.getState().loginPage.user;
   const ref = database.collection('users').doc(email).collection('todos');
   ref.orderBy('createdAt').onSnapshot(snapshot => {
@@ -33,10 +35,12 @@ export const getTodos = () => async dispatch => {
       todos.push({id, text, checked});
     });
     dispatch(setTodos(todos));
+    dispatch(setLoadingStatus(false));
 	});
 };
 
 export const addTodo = text => async dispatch => {
+  dispatch(setLoadingStatus(true));
   const { email } = store.getState().loginPage.user;
   const ref = database.collection('users').doc(email).collection('todos');
   const createdAt = firebase.firestore.FieldValue.serverTimestamp();
@@ -46,25 +50,31 @@ export const addTodo = text => async dispatch => {
     checked: false,
   });
   dispatch(updateTodos());
+  dispatch(setLoadingStatus(false));
 };
 
 export const removeTodo = id => async dispatch => {
+  dispatch(setLoadingStatus(true));
   const { email } = store.getState().loginPage.user;
   const ref = database.collection('users').doc(email).collection('todos').doc(id);
   await ref.delete();
   dispatch(updateTodos());
+  dispatch(setLoadingStatus(false));
 };
 
 export const toggleCheckTodo = id => async dispatch => {
+  dispatch(setLoadingStatus(true));
   const { email } = store.getState().loginPage.user;
   const ref = database.collection('users').doc(email).collection('todos').doc(id);
   const todo = await ref.get();
   const { checked } = todo.data();
   ref.update({ checked: !checked });
   dispatch(updateTodos());
+  dispatch(setLoadingStatus(false));
 };
 
 export const updateTodos = () => async dispatch => {
+  dispatch(setLoadingStatus(true));
   const { email } = store.getState().loginPage.user;
   const { selectedFilter } = store.getState().todoList;
   const ref = database.collection('users').doc(email).collection('todos');
@@ -77,6 +87,7 @@ export const updateTodos = () => async dispatch => {
   });
   dispatch(setTodos(todos));
   dispatch(filterByStatus(selectedFilter));
+  dispatch(setLoadingStatus(false));
 };
 
 export const filterByStatus = status => async dispatch => {

@@ -23,6 +23,7 @@ export const Title = styled.h1`
   font-size: 20px;
   text-align: left;
   font-weight: 700;
+  flex: 1;
 
   & > small {
     font-weight: 400;
@@ -39,6 +40,21 @@ export const ButtonLogout = styled.button`
   border: 0;
   appearance: none;
   cursor: pointer;
+`;
+
+export const LoadingIcon = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  background-color: transparent;
+  border: 0;
+  appearance: none;
+  cursor: pointer;
+  margin-right: 15px;
+
+  & svg {
+    animation-duration: .1s;
+  }
 `;
 
 export const Form = styled.form`
