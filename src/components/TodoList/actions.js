@@ -96,7 +96,7 @@ export const filterByStatus = status => async dispatch => {
     dispatch(setFilterIsActive(false));
     return;
   }
-  const filteredTodos = todos.filter(todo => todo.checked == (status == 'DONES'));
+  const filteredTodos = todos.filter(todo => todo.checked == (status == 'DONE'));
   dispatch(setFilterIsActive(true));
   dispatch(setFilteredTodos(filteredTodos));
 };
