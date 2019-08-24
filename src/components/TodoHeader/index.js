@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   updateInputText,
@@ -32,18 +32,13 @@ const Header = () => {
   const [tabActive, setTabActive] = useState(0);
   const TABS = ['ALL', 'PENDING', 'DONE'];
 
-  useEffect(() => {
-    setTimeout(() => {
-      inputRef.current.focus();
-    }, 1000);
-  },[])
-
   const addTodoItem = text => dispatch(addTodo(text));
 
   const handleInputChange = event => dispatch(updateInputText(event.target.value));
 
   const handleFormSubmit = event => {
     event.preventDefault();
+    console.log(inputText);
     addTodoItem(inputText);
     dispatch(clearInputText());
   }

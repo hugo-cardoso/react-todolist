@@ -1,11 +1,9 @@
 import React from 'react';
 import Icon from '@mdi/react';
-import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiClose } from '@mdi/js';
+import { mdiCheckboxBlankOutline, mdiCheckboxMarked, mdiMenuRight } from '@mdi/js';
 import { useDispatch } from 'react-redux';
-import {
-  removeTodo,
-  toggleCheckTodo
-} from '@components/TodoList/actions';
+import { Link } from 'react-router-dom';
+import { toggleCheckTodo } from '@components/TodoList/actions';
 import {
   Wrapper,
   ActionWrapper,
@@ -30,11 +28,18 @@ const TodoItem = ({
       <Content>
         <Text>{ text }</Text>
       </Content>
-      <ActionWrapper onClick={() => dispatch(removeTodo(id))}>
-        <Icon path={mdiClose}
-          size={1}
-          color="#F0002F" 
-        />
+      <ActionWrapper>
+        <Link
+          to={{
+            pathname: '/tododetail',
+            search: `?id=${ id }`
+          }}
+        >
+          <Icon path={mdiMenuRight}
+            size={1}
+            color="#FFF" 
+          />
+        </Link>
       </ActionWrapper>
     </Wrapper>
   )

@@ -31,8 +31,8 @@ export const getTodos = () => async dispatch => {
 		const todos = [];
     snapshot.forEach((doc) => {
       const { id } = doc;
-      const { text, checked } = doc.data();
-      todos.push({id, text, checked});
+      const { text, checked, createdAt } = doc.data();
+      todos.push({id, text, checked, createdAt});
     });
     dispatch(setTodos(todos));
     dispatch(setLoadingStatus(false));
@@ -82,8 +82,8 @@ export const updateTodos = () => async dispatch => {
   const todos = [];
   snapshot.forEach((doc) => {
     const { id } = doc;
-    const { text, checked } = doc.data();
-    todos.push({id, text, checked});
+    const { text, checked, createdAt } = doc.data();
+    todos.push({id, text, checked, createdAt});
   });
   dispatch(setTodos(todos));
   dispatch(filterByStatus(selectedFilter));
