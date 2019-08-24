@@ -90,7 +90,10 @@ const Header = () => {
       <Tabs tabsCount={TABS.length} tabActive={tabActive}>
         {
           TABS.map((tab, index) => (
-            <Tab key={tab} onClick={() => handleTabClick(index)}>{ tab }{ tab == 'ALL' && `(${ todos.length })` }</Tab>
+            <Tab 
+              key={tab}
+              isActive={tabActive == index}
+              onClick={() => handleTabClick(index)}>{ tab }{ tab == 'ALL' && `(${ todos.length })` }</Tab>
           ))
         }
       </Tabs>
