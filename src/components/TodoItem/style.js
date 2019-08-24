@@ -1,17 +1,4 @@
-import styled, { keyframes } from 'styled-components';
-
-const enterLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-35px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-  }
-`;
-
+import styled from 'styled-components';
 
 export const Content = styled.div`
   flex: 1;
@@ -52,7 +39,13 @@ export const Wrapper = styled.div`
   min-height: 50px;
   border-bottom: 1px solid #FFF;
   background-color: #000;
-  animation: ${ enterLeft } .5s ease;
+  opacity: 0;
+  transform: translateX(-35px);
+  animation-timing-function: ease;
+  animation-name: enterLeftAnimation;
+  animation-duration: .3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
   ${ ({checked}) => checked && `
       & ${ Text } {
         ::after {
@@ -61,6 +54,17 @@ export const Wrapper = styled.div`
         }
       }
   ` };
+  ${
+    () => {
+      let styles = ``;
+      for (let i = 1; i < 20; i += 1) {
+        styles += `
+          :nth-child(${i}) {animation-delay: ${i}20ms;}
+        `
+      }
+      return styles;
+    }
+  }
 
   :last-child {border-bottom: 0;}
 `;

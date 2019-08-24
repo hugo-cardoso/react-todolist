@@ -37,4 +37,16 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     align-items: center;
   }
+
+  @keyframes enterLeftAnimation {
+    0% {
+      transform: translateX(-35px);
+      opacity: 0;
+    }
+    
+    100% {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
 `;
