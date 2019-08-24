@@ -57,27 +57,51 @@ export const LoadingIcon = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  width: 100%;
+export const ButtonSend = styled.button`
+  width: 50px;
+  background-color: #FFF;
+  margin-left: 14px;
+  border: 0;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
 `;
 
-export const Input = styled.input`
+
+export const Input = styled.textarea.attrs({
+  autocomplete: 'off',
+})`
+  flex: 1;
   width: 100%;
   height: 40px;
   border: 0;
   border-radius: 3px;
-  padding: 0 15px;
+  padding: 14px;
   color: #FFF;
   font-size: 16px;
+  line-height: 24px;
   font-weight: 500;
   appearance: none;
   background-color: #000;
   text-transform: uppercase;
+  transition: height .3s ease;
+  resize: none;
+
+  &:focus {
+    height: 150px;
+  }
 
   @media screen and (max-width: 768px) {
     height: 50px;
     font-size: 16px;
   }
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
 `;
 
 export const Tabs = styled.div`

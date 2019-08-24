@@ -8,7 +8,7 @@ import { addTodo, filterByStatus, setSelectedFilter } from '@components/TodoList
 import { logout } from '@pages/Login/actions';
 
 import Icon from '@mdi/react';
-import { mdiLogout, mdiLoading } from '@mdi/js';
+import { mdiLogout, mdiLoading, mdiSend } from '@mdi/js';
 
 import {
   Wrapper,
@@ -19,7 +19,8 @@ import {
   ButtonLogout,
   Tabs,
   Tab,
-  LoadingIcon
+  LoadingIcon,
+  ButtonSend
 } from './style';
 
 const Header = () => {
@@ -84,6 +85,12 @@ const Header = () => {
           placeholder={ `add a new todo ${ user.displayName.split(" ")[0] }...` }
           required
         />
+        <ButtonSend type="submit">
+          <Icon path={mdiSend}
+            size={1}
+            color="#F0002F"
+          />
+        </ButtonSend>
       </Form>
       <Tabs tabsCount={TABS.length} tabActive={tabActive}>
         {
