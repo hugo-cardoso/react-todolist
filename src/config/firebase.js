@@ -1,5 +1,10 @@
+// if( process.env.NODE_ENV == 'production' ) {
+//   require('dotenv').config();
+//   console.log(process.env.FIREBASE_KEY);
+// }
+
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyBdA0Jgk7S8C51YhykZO92YsoJOGe33fFQ",
+  apiKey: process.env.NODE_ENV == 'production' ? FIREBASE_KEY : process.env.FIREBASE_KEY,
   authDomain: "react-todolist-97835.firebaseapp.com",
   databaseURL: "https://react-todolist-97835.firebaseio.com",
   projectId: "react-todolist-97835",
