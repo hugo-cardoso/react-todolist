@@ -4,7 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#000000">
   <title>React TodoList</title>
+  <meta name="description" content="Three colors and a list..">
+  <link rel="shortcut icon" href="<%=require('./favicon.ico')%>" type="image/x-icon">
+  <meta property="og:title" content="React TodoList">
+  <meta property="og:description" content="Three colors and a list.">
+  <meta property="og:url" content="https://react-todolistt.herokuapp.com/">
+  <meta property="og:image" content="<%=require('../src/assets/images/thumbnail.png')%>">
+  <meta property="og:type" content="website">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6SRT6WZTV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-C6SRT6WZTV');
+  </script>
 </head>
 <body>
   <div id="app"></div>
