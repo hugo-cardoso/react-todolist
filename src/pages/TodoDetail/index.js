@@ -22,32 +22,11 @@ import {
 } from './style';
 
 const pickerTheme = createMuiTheme({
-  overrides: {
-    MuiPickersToolbar: {
-      toolbar: {
-        backgroundColor: '#F0002F',
-      },
-    },
-    MuiPickersDay: {
-      daySelected: {
-        backgroundColor: '#F0002F',
-        color: '#FFF'
-      },
-      dayDisabled: {
-        opacity: '.5'
-      },
-    },
-    MuiButton: {
-      textPrimary: {
-        color: '#F0002F'
-      }
-    },
-    MuiFormControl: {
-      root: {
-        display: 'none'
-      }
+  palette: {
+    primary: {
+      main: '#F0002F'
     }
-  },
+  }
 });
 
 const TodoDetailPage = ({history}) => {
@@ -123,6 +102,7 @@ const TodoDetailPage = ({history}) => {
             onOpen={() => setDatePickerIsOpen(true)}
             onClose={() => setDatePickerIsOpen(false)}
             ampm={false}
+            hideTabs
             disablePast
           />
         </ThemeProvider>
