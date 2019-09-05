@@ -20,7 +20,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body * {
     font: 14px 'Roboto', sans-serif;
-    color: #455A64;
     -webkit-font-smoothing: antialiased !important;
     overflow: hidden;
   }

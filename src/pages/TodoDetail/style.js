@@ -77,3 +77,16 @@ export const ContentDate = styled.p`
   color: #FFF;
   letter-spacing: .01rem;
 `;
+
+export const FloatButton = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #F0002F;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
