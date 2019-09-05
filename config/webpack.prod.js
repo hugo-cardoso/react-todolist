@@ -7,7 +7,8 @@ module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({           
-      FIREBASE_KEY: JSON.stringify(process.env.FIREBASE_KEY),      
+      FIREBASE_KEY: JSON.stringify(process.env.FIREBASE_KEY),
+      GOOGLE_KEY: JSON.stringify(process.env.GOOGLE_KEY),   
     })
   ]
 });
