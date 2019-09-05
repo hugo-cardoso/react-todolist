@@ -9,6 +9,7 @@ import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/styles";
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
+import * as calendarService from '@/services/calendarService';
 
 import { 
   Wrapper,
@@ -42,25 +43,13 @@ const TodoDetailPage = ({history}) => {
   };
 
   const addEvent = async (date) => {
-    const eventModel = {
-      'summary': `React Todo - ${ id }`,
-      'description': todo.text,
-      'start': {
-        'dateTime': moment(date).format('YYYY-MM-DDTHH:mm:ss.SSS'),
-        'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-      },
-      'end': {
-        'dateTime': moment(date).add(15, 'minutes').format('YYYY-MM-DDTHH:mm:ss.SSS'),
-        'timeZone': Intl.DateTimeFormat().resolvedOptions().timeZone
-      }
-    };
-    const event = await gapi.client.calendar.events.insert({
-      'calendarId': 'primary',
-      'resource': eventModel
-    });
-    if( event ) {
-      alert('Event Added!');
-    }
+    const event = await calendarService.addEvent(
+      `React Todo - ${ id }`,
+      todo.text,
+      date,
+      date
+    );
+    if( event ) alert('Event Added!');
   };
   
   const handleChangePicker = date => {

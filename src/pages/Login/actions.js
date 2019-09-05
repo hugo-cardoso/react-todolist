@@ -10,11 +10,12 @@ const loadGoogleApi = () => {
   return new Promise((resolve) => {
     gapi.load('client:auth2', async () => {
       await gapi.client.init({
-        apiKey	: 'AIzaSyBZFdtRA7Env9KRCNE3W4nw6sgOxA8aDoE',
+        apiKey	: process.env.NODE_ENV == 'production' ? GOOGLE_KEY : process.env.GOOGLE_KEY,
         clientId: '681761028706-i3glgbm17ivctan81ducavuukg2k269t.apps.googleusercontent.com',
-        scope: 'profile https://www.googleapis.com/auth/calendar.readonly'
+        scope: 'profile https://www.googleapis.com/auth/calendar.readonly',
+        discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]
       });
-      gapi.client.load('calendar','v3', () => resolve());
+      resolve();
     });
   })
 };
